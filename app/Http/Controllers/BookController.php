@@ -23,7 +23,13 @@ class BookController extends Controller {
 
         return response()->json($book, 201);
     }
-    public function update() {
+    public function update(Book $book, Request $request) {
+        if ($request->title) $book->title = $request->title;
+        if ($request->author) $book->author = $request->author;
+        if ($request->genre) $book->genre_id = Genre::where('name', $request->genre)->first()?->id;
+        $book->save();
+
+        return response()->json($book, 200);
     }
     public function destroy() {
     }

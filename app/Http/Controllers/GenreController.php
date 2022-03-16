@@ -20,7 +20,10 @@ class GenreController extends Controller {
 
         return response()->json($genre, 201);
     }
-    public function update() {
+    public function update(Genre $genre, Request $request) {
+        if ($genre->name) $genre->name = $request->name;
+
+        return response()->json($genre, 200);
     }
     public function destroy() {
     }
