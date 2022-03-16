@@ -30,7 +30,7 @@ class GenreController extends Controller {
         $genre->name = $request->name;
         $genre->save();
 
-        return response()->json($genre, 201);
+        return response()->json($genre->fresh(), 201);
     }
     public function update(Genre $genre, Request $request) {
         $validator = Validator::make($request->all(), [
@@ -46,7 +46,7 @@ class GenreController extends Controller {
         if ($genre->name) $genre->name = $request->name;
         $genre->save();
 
-        return response()->json($genre, 200);
+        return response()->json($genre->fresh(), 200);
     }
     public function destroy(Genre $genre) {
         try {

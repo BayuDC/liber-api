@@ -10,10 +10,10 @@ use App\Models\Genre;
 
 class BookController extends Controller {
     public function index() {
-        return Book::all(['id', 'title', 'author']);
+        return Book::with('genre')->get();
     }
     public function show(Book $book) {
-        return $book;
+        return $book->load('genre');
     }
     public function store(Request $request) {
         $validator = Validator::make($request->all(), [
@@ -35,7 +35,7 @@ class BookController extends Controller {
         $book->genre_id = Genre::where('name', $request->genre)->first()?->id;
         $book->save();
 
-        return response()->json($book, 201);
+        return response()->json($book->fresh('genre'), 201);
     }
     public function update(Book $book, Request $request) {
         $validator = Validator::make($request->all(), [
@@ -54,7 +54,7 @@ class BookController extends Controller {
         if ($request->genre) $book->genre_id = Genre::where('name', $request->genre)->first()?->id;
         $book->save();
 
-        return response()->json($book, 200);
+        return response()->json($book->fresh('genre'), 200);
     }
     public function destroy(Book $book) {
         $book->delete();
