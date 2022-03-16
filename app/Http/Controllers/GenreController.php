@@ -13,7 +13,12 @@ class GenreController extends Controller {
     public function show(Genre $genre) {
         return $genre;
     }
-    public function store() {
+    public function store(Request $request) {
+        $genre = new Genre;
+        $genre->name = $request->name;
+        $genre->save();
+
+        return response()->json($genre, 201);
     }
     public function update() {
     }
