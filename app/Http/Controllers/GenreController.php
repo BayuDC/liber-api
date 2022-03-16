@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use App\Models\Genre;
+use Exception;
 
 class GenreController extends Controller {
     public function index() {
@@ -25,6 +26,13 @@ class GenreController extends Controller {
 
         return response()->json($genre, 200);
     }
-    public function destroy() {
+    public function destroy(Genre $genre) {
+        try {
+            $genre->delete();
+
+            return response()->noContent();
+        } catch (Exception) {
+            return response()->noContent(406);
+        }
     }
 }

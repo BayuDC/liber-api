@@ -20,10 +20,10 @@ Route::get('/book', [BookController::class, 'index']);
 Route::get('/book/{book:id}', [BookController::class, 'show']);
 Route::post('/book/', [BookController::class, 'store']);
 Route::put('/book/{book:id}', [BookController::class, 'update']);
-Route::delete('/book/{book:id}', [BookController::class, 'destory']);
+Route::delete('/book/{book:id}', [BookController::class, 'destroy']);
 
 Route::get('/genre', [GenreController::class, 'index']);
 Route::get('/genre/{genre:id}', [GenreController::class, 'show']);
 Route::post('/genre/', [GenreController::class, 'store']);
 Route::put('/genre/{genre:id}', [GenreController::class, 'update']);
-Route::delete('/genre/{genre:id}', [GenreController::class, 'destory']);
+Route::delete('/genre/{genre:id}', [GenreController::class, 'destroy']);
