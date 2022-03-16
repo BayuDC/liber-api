@@ -2,6 +2,8 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\BookController;
+use App\Http\Controllers\GenreController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,6 +16,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+Route::get('/book', [BookController::class, 'index']);
+Route::get('/book/{book:id}', [BookController::class, 'show']);
+Route::post('/book/', [BookController::class, 'store']);
+Route::put('/book/{book:id}', [BookController::class, 'update']);
+Route::delete('/book/{book:id}', [BookController::class, 'destory']);
+
+Route::get('/genre', [GenreController::class, 'index']);
+Route::get('/genre/{genre:id}', [GenreController::class, 'show']);
+Route::post('/genre/', [GenreController::class, 'store']);
+Route::put('/genre/{genre:id}', [GenreController::class, 'update']);
+Route::delete('/genre/{genre:id}', [GenreController::class, 'destory']);
